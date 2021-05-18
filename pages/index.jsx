@@ -1,5 +1,5 @@
 import { useState, useContext, useEffect } from "react";
-import { state, store } from "../lib/store";
+import { store } from "../lib/store";
 
 import Page from "../components/Page";
 
