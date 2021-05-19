@@ -66,6 +66,7 @@ export default function Profile(params) {
 
   return (
     <Page title="Profile">
+      <div className="goback"><Button link="/" inverted>Cancel</Button></div>
       <div className="profile">
           <img width="150px" height="150px"  src={`data:image/png;base64,${state.user.picture}`} alt="" />
         <input type="file" onChange={SaveImage} />

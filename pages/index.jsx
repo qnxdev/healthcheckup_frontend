@@ -1,13 +1,13 @@
 import { useState, useContext, useEffect } from "react";
 import { store } from "../lib/store";
-
+import { useRouter } from "next/router";
 import Page from "../components/Page";
-
 import styles from "../styles/Home.module.css";
 import { Button } from "../components/Button";
 import { symptoms } from "../lib/symptoms";
 
 export default function Home() {
+  const router = useRouter();
   const { state, dispatch } = useContext(store);
   const [resObject, setResObject] = useState(symptoms);
   const [list, setList] = useState([]);
@@ -26,9 +26,10 @@ export default function Home() {
       InputElement.placeholder = "Start typing a symptom";
     }, 2000);
   };
-  const Predict=()=>{
-    dispatch({type:'symptoms', payload: list})
-  }
+  const Predict = () => {
+    dispatch({ type: "symptoms", payload: list });
+    router.push("/intermediate");
+  };
 
   useEffect(() => {
     if (searchTerm.length == 0) {
@@ -49,14 +50,20 @@ export default function Home() {
 
   return (
     <Page title="Home">
-      <div className="welcome">
-        <h1 >Hi {state.user.firstname || "User"}!</h1>
+      <div
+        onClick={() => {
+          showSelector(false);
+        }}
+        className={styles.welcome}
+      >
+        <h1>Hi {state.user.firstname || "User"}!</h1>
         <h3>What is bothering you today? </h3>
       </div>
-      <div className="input-section">
-        <div className="symptom-adder">
-          <div className="symptom-input">
+      <div className={styles.inputsection}>
+        <div className={styles.symptominput}>
+          <div className={styles.symptomadder}>
             <input
+              autoComplete="off"
               type="text"
               id="input"
               placeholder="Start typing a symptom"
@@ -65,48 +72,64 @@ export default function Home() {
               }}
               onChange={(e) => setSearchTerm(e.target.value)}
             />
-            <Button onClick={Predict}>Next</Button>
+            {selector && (
+              <div className={styles.symptomselector}>
+                {resObject.map((symptom, index) => (
+                  <p
+                    title="Add this"
+                    onClick={() => {
+                      if (!list.includes(symptom)) {
+                        setList([...list, symptom]);
+                        showMessage("Symptom added", "success");
+                        showSelector(false);
+                      } else {
+                        showMessage("Symptom already added!", "error");
+                        showSelector(false);
+                      }
+                    }}
+                    key={index}
+                  >
+                    {symptom}
+                  </p>
+                ))}
+              </div>
+            )}
           </div>
-          <div className="symptom-selector">
-            {selector &&
-              resObject.map((symptom, index) => (
-                <p
-                  onClick={() => {
-                    if (!list.includes(symptom)) {
-                      setList([...list, symptom]);
-                      showMessage("Symptom added", "success");
-                      showSelector(false);
-                    } else {
-                      showMessage("Symptom already added!", "error");
-                      showSelector(false);
-                    }
-                  }}
-                  key={index}
-                >
-                  {symptom}
-                </p>
-              ))}
-          </div>
+          <Button onClick={Predict} width="150px" title="Predict disease">
+            Next
+          </Button>
         </div>
-        <div className="symptom-list">
-          {list.map((item, index) => (
-            <div key={index} className="symptom">
-              <p>{item}</p>
+        {list.length > 0 && (
+          <div className={styles.symptomlist}>
+            {list.map((item, index) => (
               <div
+                key={index}
+                className={styles.symptom}
                 onClick={() =>
                   setList([
                     ...list.slice(0, index),
                     ...list.slice(index + 1, list.length),
                   ])
                 }
-                className="delete-symptom"
               >
-                x
+                <p>{item}</p>
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="18"
+                  height="18"
+                  viewBox="0 0 18 18"
+                >
+                  <path
+                    fill="#3b1948"
+                    d="M14.53 4.53l-1.06-1.06L9 7.94 4.53 3.47 3.47 4.53 7.94 9l-4.47 4.47 1.06 1.06L9 10.06l4.47 4.47 1.06-1.06L10.06 9z"
+                  />
+                </svg>
               </div>
-            </div>
-          ))}
-        </div>
+            ))}
+          </div>
+        )}
       </div>
+      <h3>Recent Predictions : {state.recent || "None"}</h3>
     </Page>
   );
 }

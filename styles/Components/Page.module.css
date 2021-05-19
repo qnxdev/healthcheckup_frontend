@@ -1,0 +1,12 @@
+.page {
+  background-image: url("/background4.svg");
+  background-size: cover;
+  background-repeat: no-repeat;
+  color: #fff;
+  min-width: 100vw;
+  min-height: 100vh;
+}
+
+.pagecontainer {
+  text-align: center;
+}

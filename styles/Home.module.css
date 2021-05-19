@@ -1,0 +1,101 @@
+.welcome,
+.inputsection {
+  padding-bottom: 100px;
+}
+.welcome h1 {
+  font-size: 3rem;
+}
+.welcome h3 {
+  font-size: 1.5rem;
+}
+.inputsection {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}
+.symptominput {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  position: absolute;
+  z-index: 100;
+}
+.symptomadder {
+  overflow: hidden;
+  width: 50%;
+  margin-right: 10px;
+  border-radius: 10px;
+  background-color: rgba(182, 182, 182, 0.589);
+  backdrop-filter: blur(62px);
+}
+.symptomadder input {
+  width: 100%;
+  padding: 11px;
+  background: transparent;
+  border: 2px solid #fff;
+  border-radius: 10px;
+  color: #fff;
+  font-weight: 600;
+}
+
+.symptomadder input::placeholder {
+  color: #fff;
+  font-weight: 600;
+}
+.symptomadder input:focus,
+.symptomadder input:hover,
+.symptomadder input:active,
+.symptomadder input {
+  border: 2px solid #fff;
+  border-radius: 10px;
+  outline: none;
+}
+
+.symptomselector {
+  padding-top: 10px;
+  max-height: 20vh;
+  overflow-y: scroll;
+  cursor: pointer;
+}
+.symptomselector p {
+  padding: 10px;
+  margin: 0;
+}
+.symptomselector p:hover {
+  background: rgba(182, 182, 182, 0.616);
+}
+
+.symptomlist {
+    position: relative;
+    z-index: 10;
+  margin-top: 70px;
+  margin-right: 160px;
+  padding: 20px;
+  width: 50%;
+  border-radius: 10px;
+  background: rgba(182, 182, 182, 0.589);
+  backdrop-filter: blur(62px);
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.symptom {
+    cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 5px;
+  padding: 5px;
+  border-radius: 10px;
+  color: #3b1948;
+  background: rgba(228, 228, 228, 0.616);
+}
+
+.symptom p {
+  margin: 0;
+}
+
+.symptom svg{
+    margin-left: 5px;
+    border-radius: 10px;
+}

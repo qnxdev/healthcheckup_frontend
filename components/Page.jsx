@@ -1,10 +1,15 @@
 import Head from "next/head";
-import { useContext, useEffect } from "react";
+import { useContext, useEffect, useState } from "react";
+import { man_image, woman_image } from "../lib/constants";
 import { store } from "../lib/store";
 import Header from "./Header";
+import { Splash } from "./SplashScreen";
+import styles from "../styles/Components/Page.module.css";
 
 export default function Page({ title, children }) {
   const { state, dispatch } = useContext(store);
+
+  setTimeout(() => dispatch({ type: "loading", payload: false }), 1500);
 
   useEffect(() => {
     if (localStorage) {
@@ -16,9 +21,17 @@ export default function Page({ title, children }) {
           dispatch({
             type: "init",
             payload: {
-              user: { ...JSON.parse(user), picture: base64String },
+              user: {
+                ...JSON.parse(user),
+                picture: base64String
+                  ? base64String
+                  : user && user.sex == "Female"
+                  ? woman_image
+                  : man_image,
+              },
               symptoms: [],
               recent: recent,
+              loading: state.loading
             },
           });
         } catch (e) {
@@ -28,14 +41,15 @@ export default function Page({ title, children }) {
     }
   }, [state.user]);
 
-  
-  return (
-    <div className="page">
+  return state.loading ? (
+    <Splash />
+  ) : (
+    <div className={styles.page}>
       <Head>
-        <title>{title ? title + " | " : ""} Health App</title>
+        <title>{title ? title + " | " : ""}Health App</title>
       </Head>
       <Header />
-      <div className="page-container">{children}</div>
+      <div className={styles.pagecontainer}>{children}</div>
     </div>
   );
 }
