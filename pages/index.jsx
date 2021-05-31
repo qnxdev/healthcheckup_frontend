@@ -2,9 +2,10 @@ import { useState, useContext, useEffect } from "react";
 import { store } from "../lib/store";
 import { useRouter } from "next/router";
 import Page from "../components/Page";
-import styles from "../styles/Home.module.css";
+import styles from "../styles/Pages/Home.module.css";
 import { Button } from "../components/Button";
 import { symptoms } from "../lib/symptoms";
+import Link from "next/link";
 
 export default function Home() {
   const router = useRouter();
@@ -30,7 +31,6 @@ export default function Home() {
     dispatch({ type: "symptoms", payload: list });
     router.push("/intermediate");
   };
-
   useEffect(() => {
     if (searchTerm.length == 0) {
       setResObject(symptoms);
@@ -50,6 +50,7 @@ export default function Home() {
 
   return (
     <Page title="Home">
+      <Link href="/testmodel" ><button>View model test version</button></Link>
       <div
         onClick={() => {
           showSelector(false);
@@ -128,6 +129,7 @@ export default function Home() {
             ))}
           </div>
         )}
+
       </div>
       <h3>Recent Predictions : {state.recent || "None"}</h3>
     </Page>

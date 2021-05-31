@@ -8,8 +8,10 @@ import styles from "../styles/Components/Page.module.css";
 
 export default function Page({ title, children }) {
   const { state, dispatch } = useContext(store);
-
-  setTimeout(() => dispatch({ type: "loading", payload: false }), 1500);
+  
+  useEffect(() => {
+      return setTimeout(() => dispatch({ type: "loading", payload: false }), 1500);
+  },[state.loading]);
 
   useEffect(() => {
     if (localStorage) {
@@ -31,7 +33,7 @@ export default function Page({ title, children }) {
               },
               symptoms: [],
               recent: recent,
-              loading: state.loading
+              loading: state.loading,
             },
           });
         } catch (e) {

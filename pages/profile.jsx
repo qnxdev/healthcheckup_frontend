@@ -2,6 +2,7 @@ import { useContext, useState } from "react";
 import { Button } from "../components/Button";
 import Page from "../components/Page";
 import { store } from "../lib/store";
+import styles from "../styles/Pages/Profile.module.css";
 
 export default function Profile(params) {
   const { state, dispatch } = useContext(store);
@@ -12,7 +13,7 @@ export default function Profile(params) {
     age: state.user.age,
   });
   const [save, setSave] = useState("Save");
-
+  
   const SaveImage = (e) => {
     const file = e.target.files[0];
     const reader = new FileReader();
@@ -49,6 +50,7 @@ export default function Profile(params) {
       type: "user",
       payload: payload,
     });
+    console.log(payload);
     try {
       localStorage.setItem(
         "user",
@@ -66,11 +68,21 @@ export default function Profile(params) {
 
   return (
     <Page title="Profile">
-      <div className="goback"><Button link="/" inverted>Cancel</Button></div>
-      <div className="profile">
-          <img width="150px" height="150px"  src={`data:image/png;base64,${state.user.picture}`} alt="" />
-        <input type="file" onChange={SaveImage} />
-        <div className="profile-name">
+      
+      <div className={styles.profile}>
+      <div className={styles.goback}>
+        <Button link="/" inverted>
+          Cancel
+        </Button>
+      </div>
+        <img
+          width="150px"
+          height="150px"
+          src={`data:image/png;base64,${state.user.picture}`}
+          alt=""
+        />
+        <input type="file" placeholder="Change photo" onChange={SaveImage} />
+        <div className={styles.profilename}>
           <input
             type="text"
             id="firstname"
@@ -86,16 +98,14 @@ export default function Profile(params) {
             onChange={(e) => setUser({ ...user, lastname: e.target.value })}
           />
         </div>
-        <select name="sex" id="sex" defaultValue={user.sex}>
+        <select name="sex" id="sex" onChange={(e) => console.log({ ...user, sex: e.target.value })}>
           <option
             value="Male"
-            onClick={(e) => setUser({ ...user, sex: e.target.value })}
           >
             Male
           </option>
           <option
             value="Female"
-            onClick={(e) => setUser({ ...user, sex: e.target.value })}
           >
             Female
           </option>
@@ -109,7 +119,7 @@ export default function Profile(params) {
           value={user.age}
           onChange={(e) => setUser({ ...user, age: e.target.value })}
         />
-        <Button onClick={Save}>{save}</Button>
+        <Button onClick={Save} width={100}>{save}</Button>
       </div>
     </Page>
   );
