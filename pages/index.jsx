@@ -6,6 +6,7 @@ import styles from "../styles/Pages/Home.module.css";
 import { Button } from "../components/Button";
 import { symptoms } from "../lib/symptoms";
 import Link from "next/link";
+import ModelContainer from "./testmodel";
 
 export default function Home() {
   const router = useRouter();
@@ -121,7 +122,7 @@ export default function Home() {
                   viewBox="0 0 18 18"
                 >
                   <path
-                    fill="#3b1948"
+                    fill="#192a48"
                     d="M14.53 4.53l-1.06-1.06L9 7.94 4.53 3.47 3.47 4.53 7.94 9l-4.47 4.47 1.06 1.06L9 10.06l4.47 4.47 1.06-1.06L10.06 9z"
                   />
                 </svg>
@@ -129,7 +130,9 @@ export default function Home() {
             ))}
           </div>
         )}
-
+        <div className="graphicalinput">
+          <ModelContainer type={state.user.sex}/>
+        </div>
       </div>
       <h3>Recent Predictions : {state.recent || "None"}</h3>
     </Page>

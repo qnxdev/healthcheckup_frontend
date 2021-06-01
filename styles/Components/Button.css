@@ -3,9 +3,9 @@
   font-size: 1rem;
   font-weight: 600;
   border: 2px solid #fff;
-  color: #3b1948;
   padding: 10px;
   height: min-content;
+  color: #192a48;
 }
 .button:hover{
   border: 2px solid #fff;

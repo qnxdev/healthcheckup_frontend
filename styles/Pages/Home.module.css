@@ -53,7 +53,7 @@
 
 .symptomselector {
   padding-top: 10px;
-  max-height: 20vh;
+  height: 150px;
   overflow-y: scroll;
   cursor: pointer;
 }
@@ -87,7 +87,7 @@
   margin: 5px;
   padding: 5px;
   border-radius: 10px;
-  color: #3b1948;
+  color: #192a48;
   background: rgba(228, 228, 228, 0.616);
 }
 

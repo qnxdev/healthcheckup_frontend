@@ -1,0 +1,15 @@
+.results{
+  margin: 50px 20%;
+}
+
+.results ul{
+  border-radius: 20px;
+  border: 2px solid #fff;
+  margin: 50px auto;
+  width: 30%;
+  text-align: left;
+}
+
+.results li{
+  margin: auto;
+}

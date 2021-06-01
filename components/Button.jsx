@@ -1,12 +1,11 @@
 import Link from "next/link";
-import styles from "../styles/Components/Button.module.css";
 export const Button = ({ width, inverted, children, onClick, link, title }) => {
   const buttonStyle = { width: width || "initial" };
   return (
     <>
       {link ? (
         <Link href={link}>
-          <button title={title} style={buttonStyle} className={styles.button}>
+          <button title={title} style={buttonStyle} className={`button${inverted ? " invertedbutton":""}`}>
             {children}
           </button>
         </Link>
@@ -14,12 +13,22 @@ export const Button = ({ width, inverted, children, onClick, link, title }) => {
         <button
           title={title}
           style={buttonStyle}
-          className={styles.button}
+          className={`button${inverted ? " invertedbutton":""}`}
           onClick={onClick}
         >
           {children}
         </button>
       )}
+      <style>{`
+      .invertedbutton{
+        background: transparent !important;
+        color: #fff;
+      }
+      .invertedbutton:hover{
+        background: #fff !important;
+        color: #192a48;
+      }
+      `}</style>
     </>
   );
 };

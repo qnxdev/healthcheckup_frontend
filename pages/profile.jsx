@@ -13,7 +13,7 @@ export default function Profile(params) {
     age: state.user.age,
   });
   const [save, setSave] = useState("Save");
-  
+
   const SaveImage = (e) => {
     const file = e.target.files[0];
     const reader = new FileReader();
@@ -68,22 +68,22 @@ export default function Profile(params) {
 
   return (
     <Page title="Profile">
-      
       <div className={styles.profile}>
-      <div className={styles.goback}>
-        <Button link="/" inverted>
-          Cancel
-        </Button>
-      </div>
+        <div className={styles.goback}>
+          <Button title="Go back to home" inverted link="/" width="100px">
+            Back
+          </Button>
+        </div>
         <img
           width="150px"
           height="150px"
           src={`data:image/png;base64,${state.user.picture}`}
           alt=""
         />
-        <input type="file" placeholder="Change photo" onChange={SaveImage} />
+        <input type="file" title="Change photo" onChange={SaveImage} />
         <div className={styles.profilename}>
           <input
+            title="First name"
             type="text"
             id="firstname"
             placeholder="First name"
@@ -91,6 +91,7 @@ export default function Profile(params) {
             onChange={(e) => setUser({ ...user, firstname: e.target.value })}
           />
           <input
+            title="Last name"
             type="text"
             id="lastname"
             placeholder="Last name"
@@ -98,19 +99,22 @@ export default function Profile(params) {
             onChange={(e) => setUser({ ...user, lastname: e.target.value })}
           />
         </div>
-        <select name="sex" id="sex" onChange={(e) => console.log({ ...user, sex: e.target.value })}>
-          <option
-            value="Male"
-          >
+        <select
+          name="sex"
+          id="sex"
+          defaultValue={user.sex}
+          onChange={(e) => console.log({ ...user, sex: e.target.value })}
+          title="Select gender"
+        >
+          <option value="Male" title="Select this">
             Male
           </option>
-          <option
-            value="Female"
-          >
+          <option value="Female" title="Select this">
             Female
           </option>
         </select>
         <input
+          title="Change age"
           type="number"
           min={0}
           max={120}
@@ -119,7 +123,9 @@ export default function Profile(params) {
           value={user.age}
           onChange={(e) => setUser({ ...user, age: e.target.value })}
         />
-        <Button onClick={Save} width={100}>{save}</Button>
+        <Button title="Save details" onClick={Save} width="150px">
+          {save}
+        </Button>
       </div>
     </Page>
   );
