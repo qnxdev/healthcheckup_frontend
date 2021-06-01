@@ -1,5 +1,5 @@
 .page {
-  background-image: url("/background4.svg");
+  background-image: url("/background.svg");
   background-size: cover;
   background-repeat: no-repeat;
   color: #fff;
@@ -10,3 +10,10 @@
 .pagecontainer {
   text-align: center;
 }
+
+
+/* 
+
+
+
+*/

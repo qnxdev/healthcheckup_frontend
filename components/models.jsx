@@ -131,10 +131,10 @@ export const FemaleModel = ({ selected, changer }) => {
             height: 80vh;
           }
           path:hover{
-            fill: #236ba1c2;
+            fill: #ddd;
           }
           .bodyoutline{
-            fill: #236ba1c2;
+            fill: #fff;
           }
           .bodyparts{
             fill: transparent;
@@ -143,7 +143,7 @@ export const FemaleModel = ({ selected, changer }) => {
             display: block
           }
           .body-area-${selected}{
-            fill: #236ba1c2 !important;
+            fill: #ddddddc2 !important;
           }
       `}</style>
     </div>
