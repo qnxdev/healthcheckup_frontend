@@ -1,101 +1,46 @@
+
 .welcome,
 .inputsection {
+  padding-bottom: 50px;
+}
+.main{
   padding-bottom: 100px;
 }
 .welcome h1 {
   font-size: 3rem;
+  margin-top: 0;
 }
 .welcome h3 {
   font-size: 1.5rem;
 }
 .inputsection {
   display: flex;
+  align-items: flex-start;
+}
+
+.graphicalinput{
+  width: 55%;
+  position: relative;
+  border: 2px solid #fff;
+  border-radius: 20px;
+  padding: 20px;
+}
+
+.recents{
+  padding-bottom: 20px;
+}
+
+@media (max-width: 640px) {
+  
+.inputsection {
+  flex-direction: column;
   align-items: center;
+  justify-content: space-between;
+}
+.graphicalinput{
+  width: 90%;
+}
+.graphicalinput .graphicselector{
   flex-direction: column;
 }
-.symptominput {
-  display: flex;
-  justify-content: center;
-  width: 100%;
-  position: absolute;
-  z-index: 100;
-}
-.symptomadder {
-  overflow: hidden;
-  width: 50%;
-  margin-right: 10px;
-  border-radius: 10px;
-  background-color: rgba(182, 182, 182, 0.589);
-  backdrop-filter: blur(62px);
-}
-.symptomadder input {
-  width: 100%;
-  padding: 11px;
-  background: transparent;
-  border: 2px solid #fff;
-  border-radius: 10px;
-  color: #fff;
-  font-weight: 600;
-}
-
-.symptomadder input::placeholder {
-  color: #fff;
-  font-weight: 600;
-}
-.symptomadder input:focus,
-.symptomadder input:hover,
-.symptomadder input:active,
-.symptomadder input {
-  border: 2px solid #fff;
-  border-radius: 10px;
-  outline: none;
-}
-
-.symptomselector {
-  padding-top: 10px;
-  height: 150px;
-  overflow-y: scroll;
-  cursor: pointer;
-}
-.symptomselector p {
-  padding: 10px;
-  margin: 0;
-}
-.symptomselector p:hover {
-  background: rgba(182, 182, 182, 0.616);
-}
-
-.symptomlist {
-    position: relative;
-    z-index: 10;
-  margin-top: 70px;
-  margin-right: 160px;
-  padding: 20px;
-  width: 50%;
-  border-radius: 10px;
-  background: rgba(182, 182, 182, 0.589);
-  backdrop-filter: blur(62px);
-  display: flex;
-  flex-wrap: wrap;
-}
-
-.symptom {
-    cursor: pointer;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin: 5px;
-  padding: 5px;
-  border-radius: 10px;
-  color: #192a48;
-  background: rgba(228, 228, 228, 0.616);
-}
-
-.symptom p {
-  margin: 0;
-}
-
-.symptom svg{
-    margin-left: 5px;
-    border-radius: 10px;
 }

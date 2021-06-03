@@ -1,0 +1,110 @@
+.symptominputwrapper{
+  width: 40%;
+  margin-top: 100px;
+}
+.symptominput {
+  display: flex;
+  justify-content: center;
+  width: 40%;
+  position: absolute;
+  z-index: 100;
+}
+.symptomadder {
+  overflow: hidden;
+  width: 50%;
+  margin-right: 10px;
+  border-radius: 10px;
+  background-color: rgba(182, 182, 182, 0.589);
+  backdrop-filter: blur(62px);
+}
+.symptomadder input {
+  width: 100%;
+  padding: 11px;
+  background: transparent;
+  border: 2px solid #fff;
+  border-radius: 10px;
+  color: #fff;
+  font-weight: 600;
+}
+
+.symptomadder input::placeholder {
+  color: #fff;
+  font-weight: 600;
+}
+.symptomadder input:focus,
+.symptomadder input:hover,
+.symptomadder input:active,
+.symptomadder input {
+  border: 2px solid #fff;
+  border-radius: 10px;
+  outline: none;
+}
+
+.symptomselector {
+  padding-top: 10px;
+  height: 150px;
+  overflow-y: scroll;
+  cursor: pointer;
+}
+.symptomselector p {
+  padding: 10px;
+  margin: 0;
+}
+.symptomselector p:hover {
+  background: rgba(182, 182, 182, 0.616);
+}
+
+.symptomlist {
+    position: relative;
+    z-index: 10;
+    margin: auto;
+  margin-top: 70px;
+  padding: 20px;
+  width: 32vw;
+  border-radius: 10px;
+  background: rgba(182, 182, 182, 0.589);
+  backdrop-filter: blur(62px);
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.symptom {
+    cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 5px;
+  padding: 5px;
+  border-radius: 10px;
+  color: #192a48;
+  background: rgba(228, 228, 228, 0.616);
+}
+
+.symptom p {
+  text-align: left;
+  white-space: nowrap;
+  margin: 0;
+}
+
+.symptom svg{
+    margin-left: 5px;
+    border-radius: 10px;
+}
+
+@media (max-width:640px) {
+  .symptominputwrapper{
+    width: 90% !important;
+  }
+  .symptominput{
+    width: 100% !important;
+  }
+  .symptomadder{
+    display: flex !important;
+    flex-wrap: wrap !important;
+    width: 60% !important;
+    margin-left: -5vw !important;
+  }
+  .symptomlist{
+    width: 100% !important;
+  }
+}

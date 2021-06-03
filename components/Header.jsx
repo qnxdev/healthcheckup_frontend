@@ -8,7 +8,7 @@ export default function Header() {
   return (
     <div className={styles.header}>
       <Link href="/">
-        <h1>Health Checkup</h1>
+        <h1> <span>+</span> Health Checkup</h1>
       </Link>
       <Link href="/profile" >
         <div className={styles.profilemenu}>

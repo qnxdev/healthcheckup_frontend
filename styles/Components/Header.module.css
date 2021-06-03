@@ -1,7 +1,10 @@
 .header {
-  padding: 10px 20px;
-  background: transparent;
-  backdrop-filter: blur(222px);
+  padding: 5px 20px;
+  background: #3a6ac200;
+  backdrop-filter: blur(62px);
+  position: fixed;
+  width: 100vw;
+  z-index: 1000;
 }
 
 .header,
@@ -15,6 +18,13 @@
   cursor: pointer;
   margin: 0;
   font-size: 1.4rem;
+  border-radius: 7px;
+  padding: 5px 20px;
+}
+
+.header h1 span{
+  font-weight: 900;
+  color: rgb(216, 0, 0);
 }
 .profilemenu{
   cursor: pointer;

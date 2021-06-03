@@ -1,3 +1,31 @@
+export const ModelStyles = (selected) => `
+.model svg{
+  width: 20vw;
+  height: 60vh;
+}
+path:hover{
+  fill: #ddd;
+}
+.bodyoutline{
+  fill: #fff;
+}
+.bodyparts{
+  fill: transparent;
+}
+svg:hover .bodyparts{
+  display: block
+}
+.body-area-${selected}{
+  fill: #ddddddc2 !important;
+}
+@media (max-width:640px){
+  .model svg {
+    width: 50vw;
+    height: 60vh;
+}
+}
+`;
+
 export const MaleModel = ({ selected, changer, reverse }) => {
   if (!reverse) {
     return (
@@ -6,8 +34,8 @@ export const MaleModel = ({ selected, changer, reverse }) => {
           className="model-male-front"
           viewBox="0 0 168 320"
           xmlns="http://www.w3.org/2000/svg"
-          fill-rule="evenodd"
-          stroke-linejoin="round"
+          fillRule="evenodd"
+          strokeLinejoin="round"
           strokeMiterlimit="1.414"
         >
           {" "}
@@ -46,7 +74,7 @@ export const MaleModel = ({ selected, changer, reverse }) => {
                 onClick={() => changer("nose")}
                 className="body-area body-area-nose"
                 d="M83.259 19.144c1.557-.02 1.97 1.742 2 1.957l1 4.493a2.042 2.042 0 0 1-.139.755 1.983 1.983 0 0 1-.261.457 1.689 1.689 0 0 1-1.305.676c-.879.012-1.758.034-2.635-.001a1.716 1.716 0 0 1-.389-.069 1.75 1.75 0 0 1-.872-.606 1.944 1.944 0 0 1-.4-1.227c.257-1.58.731-2.9 1.001-4.478.061-.307.442-1.938 2-1.957z"
-                fill-rule="nonzero"
+                fillRule="nonzero"
               ></path>{" "}
               <path
                 onClick={() => changer("oral_cavity")}
@@ -122,27 +150,7 @@ export const MaleModel = ({ selected, changer, reverse }) => {
           </g>{" "}
         </svg>
 
-        <style>{`
-          svg{
-            width: 20vw;
-            height: 70vh;
-          }
-          path:hover{
-            fill: #ddd;
-          }
-          .bodyoutline{
-            fill: #fff;
-          }
-          .bodyparts{
-            fill: transparent;
-          }
-          svg:hover .bodyparts{
-            display: block
-          }
-          .body-area-${selected}{
-            fill: #ddddddc2 !important;
-          }
-      `}</style>
+        <style>{ModelStyles(selected)}</style>
       </div>
     );
   } else {
@@ -152,8 +160,8 @@ export const MaleModel = ({ selected, changer, reverse }) => {
           className="model-male-back"
           viewBox="0 0 168 320"
           xmlns="http://www.w3.org/2000/svg"
-          fill-rule="evenodd"
-          stroke-linejoin="round"
+          fillRule="evenodd"
+          strokeLinejoin="round"
           strokeMiterlimit="1.414"
         >
           {" "}
@@ -240,27 +248,8 @@ export const MaleModel = ({ selected, changer, reverse }) => {
             ></path>{" "}
           </g>{" "}
         </svg>
-        <style>{`
-          svg{
-            width: 20vw;
-            height: 70vh;
-          }
-          path:hover{
-            fill: #ddd;
-          }
-          .bodyoutline{
-            fill: #fff;
-          }
-          .bodyparts{
-            fill: transparent;
-          }
-          svg:hover .bodyparts{
-            display: block
-          }
-          .body-area-${selected}{
-            fill: #ddddddc2 !important;
-          }
-      `}</style>
+
+        <style>{ModelStyles(selected)}</style>
       </div>
     );
   }

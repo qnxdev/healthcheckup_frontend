@@ -1,3 +1,4 @@
+import { useRouter } from "next/router";
 import { useContext, useState } from "react";
 import { Button } from "../components/Button";
 import Page from "../components/Page";
@@ -13,6 +14,7 @@ export default function Profile(params) {
     age: state.user.age,
   });
   const [save, setSave] = useState("Save");
+  const router=useRouter()
 
   const SaveImage = (e) => {
     const file = e.target.files[0];
@@ -50,7 +52,6 @@ export default function Profile(params) {
       type: "user",
       payload: payload,
     });
-    console.log(payload);
     try {
       localStorage.setItem(
         "user",
@@ -61,6 +62,10 @@ export default function Profile(params) {
           age: payload.age,
         })
       );
+      setTimeout(()=>{
+
+      router.push('/')
+      },2000)
     } catch (e) {
       console.log(e);
     }
@@ -87,7 +92,7 @@ export default function Profile(params) {
             type="text"
             id="firstname"
             placeholder="First name"
-            value={user.firstname}
+            value={user.firstname || state.user.firstname}
             onChange={(e) => setUser({ ...user, firstname: e.target.value })}
           />
           <input
@@ -95,15 +100,15 @@ export default function Profile(params) {
             type="text"
             id="lastname"
             placeholder="Last name"
-            value={user.lastname}
+            value={user.lastname || state.user.lastname}
             onChange={(e) => setUser({ ...user, lastname: e.target.value })}
           />
         </div>
         <select
           name="sex"
           id="sex"
-          defaultValue={user.sex}
-          onChange={(e) => console.log({ ...user, sex: e.target.value })}
+          value={user.sex || state.user.sex}
+          onChange={(e) => setUser({ ...user, sex: e.target.value })}
           title="Select gender"
         >
           <option value="Male" title="Select this">
@@ -120,7 +125,7 @@ export default function Profile(params) {
           max={120}
           id="age"
           placeholder="Age"
-          value={user.age}
+          value={user.age || state.user.age}
           onChange={(e) => setUser({ ...user, age: e.target.value })}
         />
         <Button title="Save details" onClick={Save} width="150px">

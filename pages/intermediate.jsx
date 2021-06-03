@@ -7,7 +7,7 @@ export default function Predictions(params) {
   return (
     <Page title="Predictions">
       <div className={styles.goback}>
-        <Button link="/" title="Go back to previous stage" inverted>
+        <Button link="/#main" title="Go back to previous stage" inverted>
           Previous
         </Button>
       </div>

@@ -1,3 +1,5 @@
+import {ModelStyles} from './MaleModel'
+
 export const FemaleModel = ({ selected, changer, reverse }) => {
   if (!reverse) {
     return (
@@ -123,27 +125,7 @@ export const FemaleModel = ({ selected, changer, reverse }) => {
             ></path>
           </g>
         </svg>
-        <style>{`
-          svg{
-            width: 20vw;
-            height: 70vh;
-          }
-          path:hover{
-            fill: #ddd;
-          }
-          .bodyoutline{
-            fill: #fff;
-          }
-          .bodyparts{
-            fill: transparent;
-          }
-          svg:hover .bodyparts{
-            display: block
-          }
-          .body-area-${selected}{
-            fill: #ddddddc2 !important;
-          }
-      `}</style>
+        <style>{ModelStyles(selected)}</style>
       </div>
     );
   } else {
@@ -154,8 +136,8 @@ export const FemaleModel = ({ selected, changer, reverse }) => {
           ng-show="!$ctrl.bodyPerspectiveFront"
           viewBox="0 0 168 320"
           xmlns="http://www.w3.org/2000/svg"
-          fill-rule="evenodd"
-          stroke-linejoin="round"
+          fillRule="evenodd"
+          strokeLinejoin="round"
           strokeMiterlimit="1.414"
         >
           <g className="bodyoutline">
@@ -236,28 +218,8 @@ export const FemaleModel = ({ selected, changer, reverse }) => {
             ></path>{" "}
           </g>{" "}
         </svg>
-        <style>{`
-          svg{
-            width: 20vw;
-            height: 70vh;
-          }
-          path:hover{
-            fill: #ddd;
-          }
-          .bodyoutline{
-            fill: #fff;
-          }
-          .bodyparts{
-            fill: transparent;
-          }
-          svg:hover .bodyparts{
-            display: block
-          }
-          .body-area-${selected}{
-            fill: #ddddddc2 !important;
-          }
-      `}</style>
-      </div>
+        <style>{ModelStyles(selected)}</style>
+        </div>
     );
   }
 };
