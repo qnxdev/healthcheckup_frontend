@@ -9,7 +9,9 @@ export const SymtomInput = ({ list, setList, next, secondary }) => {
   const [resObject, setResObject] = useState(symptoms);
 
   const showMessage = (message, type) => {
-    const InputElement = document.getElementById(`input${secondary ? "sec":""}`);
+    const InputElement = document.getElementById(
+      `input${secondary ? "sec" : ""}`
+    );
     if (type == "success") {
       InputElement.className = "GreenSuccessInput";
     } else {
@@ -49,12 +51,14 @@ export const SymtomInput = ({ list, setList, next, secondary }) => {
         style={{
           flexWrap: secondary ? "wrap" : "initial",
           width: secondary ? "20vw" : "40%",
-          background: secondary
-            ? "linear-gradient(90deg, #316fa3, #204c70)"
-            : "initial",
+          background:
+            secondary && selector
+              ? "linear-gradient(90deg, #316fa3, #204c70)"
+              : "initial",
           borderRadius: secondary ? "10px" : "initial",
         }}
         className={styles.symptominput}
+        id={secondary ? "secondary" : "primary"}
       >
         <div
           style={{
@@ -66,7 +70,7 @@ export const SymtomInput = ({ list, setList, next, secondary }) => {
           <input
             autoComplete="off"
             type="text"
-            id={`input${secondary ? "sec":""}`}
+            id={`input${secondary ? "sec" : ""}`}
             placeholder="Start typing a symptom"
             onClick={() => {
               showSelector(!selector);
@@ -109,8 +113,10 @@ export const SymtomInput = ({ list, setList, next, secondary }) => {
           style={{
             width: secondary ? "100%" : "32vw",
             marginTop: secondary ? "120px" : "70px",
+            filter: secondary && selector ? "blur(62px)" : "none",
           }}
           className={styles.symptomlist}
+          id={secondary ? "secondarylist" : "primarylist"}
         >
           {list.map((item, index) => (
             <div
@@ -139,6 +145,19 @@ export const SymtomInput = ({ list, setList, next, secondary }) => {
           ))}
         </div>
       )}
+      <style jsx>{`
+
+@media (max-width: 640px) {
+  #secondary {
+    margin-left: -5vw !important;
+    transform: scale(0.9);
+  }
+
+  #secondarylist {
+    margin-top: 50px !important;
+  }
+}
+      `}</style>
     </div>
   );
 };

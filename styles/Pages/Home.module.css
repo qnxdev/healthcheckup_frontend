@@ -32,10 +32,14 @@
 
 @media (max-width: 640px) {
   
+.welcome, .main{
+  padding-bottom: 0px;
+}
 .inputsection {
   flex-direction: column;
   align-items: center;
   justify-content: space-between;
+  min-height: max-content;
 }
 .graphicalinput{
   width: 90%;

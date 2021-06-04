@@ -9,6 +9,7 @@
 }
 .button:hover{
   border: 2px solid #fff;
-  background: transparent;
+  background-color: rgba(182, 182, 182, 0.589);
+  backdrop-filter: blur(62px);
   color: #fff;
 }

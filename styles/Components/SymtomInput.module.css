@@ -97,14 +97,17 @@
   }
   .symptominput{
     width: 100% !important;
+    max-width: 90vw;
+    background: none !important;
   }
   .symptomadder{
     display: flex !important;
     flex-wrap: wrap !important;
     width: 60% !important;
-    margin-left: -5vw !important;
+    margin: 0px 10px !important;
   }
   .symptomlist{
     width: 100% !important;
   }
+  
 }

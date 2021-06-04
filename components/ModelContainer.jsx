@@ -110,6 +110,11 @@ export default function ModelContainer({ type, list, setList, next }) {
   .graphicselector{
     flex-direction: column;
   }}
+
+  .partoptions{
+    width: 100%;
+
+  }
       `}</style>
     </>
   );
