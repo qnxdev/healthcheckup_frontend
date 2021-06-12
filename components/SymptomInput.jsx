@@ -1,12 +1,14 @@
 import { useEffect, useState } from "react";
 import { Button } from "../components/Button";
-import { symptoms } from "../lib/symptoms";
+import { groupsymptoms, symptoms } from "../lib/symptoms";
 import styles from "../styles/Components/SymtomInput.module.css";
 
-export const SymtomInput = ({ list, setList, next, secondary }) => {
+export const SymtomInput = ({ list, setList, next, secondary, selected }) => {
   const [selector, showSelector] = useState(false);
   const [searchTerm, setSearchTerm] = useState("");
-  const [resObject, setResObject] = useState(symptoms);
+  const [resObject, setResObject] = useState(
+    selected && selected !== "" ? groupsymptoms[selected].symptoms : symptoms
+  );
 
   const showMessage = (message, type) => {
     const InputElement = document.getElementById(
@@ -24,20 +26,33 @@ export const SymtomInput = ({ list, setList, next, secondary }) => {
   };
   useEffect(() => {
     if (searchTerm.length == 0) {
-      setResObject(symptoms);
+      setResObject(
+        selected && selected !== ""
+          ? groupsymptoms[selected].symptoms
+          : symptoms
+      );
       showSelector(false);
     } else {
-      const results = symptoms.filter(function (symptom) {
-        if (
-          symptom.toLowerCase().includes(searchTerm.toLowerCase()) &&
-          !list.includes(symptom)
-        )
-          return symptom;
-      });
+      const results =
+        selected && selected !== ""
+          ? groupsymptoms[selected].symptoms.filter(function (symptom) {
+              if (
+                symptom.toLowerCase().includes(searchTerm.toLowerCase()) &&
+                !list.includes(symptom)
+              )
+                return symptom;
+            })
+          : symptoms.filter(function (symptom) {
+              if (
+                symptom.toLowerCase().includes(searchTerm.toLowerCase()) &&
+                !list.includes(symptom)
+              )
+                return symptom;
+            });
       setResObject(results);
       showSelector(true);
     }
-  }, [searchTerm]);
+  }, [searchTerm,selected]);
 
   return (
     <div
@@ -50,11 +65,7 @@ export const SymtomInput = ({ list, setList, next, secondary }) => {
       <div
         style={{
           flexWrap: secondary ? "wrap" : "initial",
-          width: secondary ? "20vw" : "40%",
-          background:
-            secondary && selector
-              ? "linear-gradient(90deg, #316fa3, #204c70)"
-              : "initial",
+          width: secondary ? "25vw" : "40%",
           borderRadius: secondary ? "10px" : "initial",
         }}
         className={styles.symptominput}
@@ -94,9 +105,13 @@ export const SymtomInput = ({ list, setList, next, secondary }) => {
                   }}
                   key={index}
                 >
-                  {symptom}
+                  {symptom.replaceAll("_"," ")}
                 </p>
               ))}
+              {resObject.length === 0 && <p
+                >
+                  Nothing found
+                </p>}
             </div>
           )}
         </div>
@@ -129,7 +144,7 @@ export const SymtomInput = ({ list, setList, next, secondary }) => {
                 ])
               }
             >
-              <p>{item}</p>
+              <p>{item.replaceAll("_"," ")}</p>
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 width="18"
@@ -146,17 +161,16 @@ export const SymtomInput = ({ list, setList, next, secondary }) => {
         </div>
       )}
       <style jsx>{`
+        @media (max-width: 640px) {
+          #secondary {
+            margin-left: -5vw !important;
+            transform: scale(0.9);
+          }
 
-@media (max-width: 640px) {
-  #secondary {
-    margin-left: -5vw !important;
-    transform: scale(0.9);
-  }
-
-  #secondarylist {
-    margin-top: 50px !important;
-  }
-}
+          #secondarylist {
+            margin-top: 50px !important;
+          }
+        }
       `}</style>
     </div>
   );

@@ -1,9 +1,12 @@
+import { useContext } from "react";
 import { Button } from "../components/Button";
 import Page from "../components/Page";
+import { store } from "../lib/store";
 import styles from "../styles/Pages/Intermediate.module.css";
 
-export default function Predictions(params) {
-  let randAcc = parseInt(Math.random(0.85,1)*(99 - 85) + 85);
+export default function Predictions() {
+  const { state, dispatch } = useContext(store);
+  let randAcc = parseInt(Math.random(0.85, 1) * (99 - 85) + 85);
   return (
     <Page title="Predictions">
       <div className={styles.goback}>
@@ -12,7 +15,7 @@ export default function Predictions(params) {
         </Button>
       </div>
       <div className="predictions">
-        <h2>Prediction Results: {`Some disease`}</h2>
+        <h2>Prediction Results: {state.recent || `None found`}</h2>
         <div className={styles.accuracy}>
           <p>Prediction Accuracy: </p>
           <div className={styles.progressbar}>
@@ -25,7 +28,7 @@ export default function Predictions(params) {
         </Button>
         <style>{`
           .progress{
-    width: ${parseInt(randAcc/100*250)}px;
+    width: ${parseInt((randAcc / 100) * 250)}px;
     height: 10px;
     background-color: #fff;
     border-radius: 20px;

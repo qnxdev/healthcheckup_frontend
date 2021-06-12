@@ -38,7 +38,7 @@ export default function ModelContainer({ type, list, setList, next }) {
             <h1>Selected: {selected || "None"}</h1>
           </div>
           <div className="partoptions">
-            <SymtomInput list={list} setList={setList} secondary next={next} />
+            <SymtomInput list={list} setList={setList} secondary next={next} selected={selected} />
           </div>
         </div>
       </div>

@@ -7,13 +7,24 @@ import { Button } from "../components/Button";
 import Link from "next/link";
 import ModelContainer from "../components/ModelContainer";
 import { SymtomInput } from "../components/SymptomInput";
+import { groupsymptoms } from "../lib/symptoms";
 
 export default function Home() {
   const router = useRouter();
   const { state, dispatch } = useContext(store);
   const [list, setList] = useState(state.symptoms);
-  const Predict = () => {
+  const Predict = async () => {
     dispatch({ type: "symptoms", payload: list });
+    try {
+      const res = await fetch(
+        `/api/prediction?symptoms=${state.symptoms.join(",")}`
+      );
+      const { disease } = await res.json();
+      dispatch({ type: "recent", payload: disease });
+      console.log(disease);
+    } catch (error) {
+      console.log(error);
+    }
     router.push("/intermediate");
   };
 
@@ -26,7 +37,11 @@ export default function Home() {
       <div id="main" className={styles.main}></div>
       <div
         className={styles.inputsection}
-        onMouseEnter={() => router.push("/#main")}
+        onMouseEnter={() => {
+          if (window && window.innerWidth > 640) {
+            router.push("/#main");
+          }
+        }}
       >
         <SymtomInput list={list} setList={setList} next={Predict} />
         <div className={styles.graphicalinput}>

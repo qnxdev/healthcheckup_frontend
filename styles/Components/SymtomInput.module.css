@@ -42,7 +42,7 @@
 
 .symptomselector {
   padding-top: 10px;
-  height: 150px;
+  max-height: 150px;
   overflow-y: scroll;
   cursor: pointer;
 }
