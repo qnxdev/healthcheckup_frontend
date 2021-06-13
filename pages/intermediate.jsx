@@ -1,4 +1,5 @@
-import { useContext } from "react";
+import { useRouter } from "next/router";
+import { useContext, useEffect } from "react";
 import { Button } from "../components/Button";
 import Page from "../components/Page";
 import { store } from "../lib/store";
@@ -6,7 +7,15 @@ import styles from "../styles/Pages/Intermediate.module.css";
 
 export default function Predictions() {
   const { state, dispatch } = useContext(store);
+  const router=useRouter()
+
   let randAcc = parseInt(Math.random(0.85, 1) * (99 - 85) + 85);
+  
+  useEffect(()=>{
+    if(state.recent==""){
+      router.push('/')
+    }
+  })
   return (
     <Page title="Predictions">
       <div className={styles.goback}>

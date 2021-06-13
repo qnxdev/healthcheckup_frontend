@@ -14,18 +14,20 @@ export default function Home() {
   const { state, dispatch } = useContext(store);
   const [list, setList] = useState(state.symptoms);
   const Predict = async () => {
-    dispatch({ type: "symptoms", payload: list });
-    try {
-      const res = await fetch(
-        `/api/prediction?symptoms=${state.symptoms.join(",")}`
-      );
-      const { disease } = await res.json();
-      dispatch({ type: "recent", payload: disease });
-      console.log(disease);
-    } catch (error) {
-      console.log(error);
+    if (list.length > 0) {
+      dispatch({ type: "symptoms", payload: list });
+      try {
+        const res = await fetch(
+          `/api/prediction?symptoms=${state.symptoms.join(",")}`
+        );
+        const { disease } = await res.json();
+        dispatch({ type: "recent", payload: disease });
+        console.log(disease);
+      } catch (error) {
+        console.log(error);
+      }
+      router.push("/intermediate");
     }
-    router.push("/intermediate");
   };
 
   return (

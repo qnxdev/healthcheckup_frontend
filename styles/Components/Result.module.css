@@ -8,8 +8,10 @@
   margin: 50px auto;
   width: 30%;
   text-align: left;
+  padding: 20px;
 }
 
 .results li{
   margin: auto;
+  margin-left: 10px;
 }
