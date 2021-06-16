@@ -1,8 +1,17 @@
 // Next.js API route support: https://nextjs.org/docs/api-routes/introduction
 
-export default (req, res) => {
-  if(req.query && req.query.symptoms){
-  console.log(req.query.symptoms.split(","));
+import { REST_HOST } from "../../lib/keys";
+
+export default async (req, res) => {
+  if (req.query && req.query.symptoms) {
+    try {
+      const result = await fetch(`${REST_HOST}?symptoms=${req.query.symptoms}`);
+      res.status(200).send({ disease: await result.text() });
+    } catch (error) {
+      console.log(error);
+      res.status(404).send({ disease: "None found" });
+    }
+  } else {
+    res.status(404).send({ disease: "None found" });
   }
-  res.status(200).send({disease:'Sinusitis'})
-}
+};
