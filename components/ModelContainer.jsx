@@ -35,7 +35,7 @@ export default function ModelContainer({ type, list, setList, next }) {
 
         <div className="selection">
           <div className="selected">
-            <h1>Selected: {selected || "None"}</h1>
+            <h1>Selected: {selected.replaceAll("_"," ") || "None"}</h1>
           </div>
           <div className="partoptions">
             <SymtomInput list={list} setList={setList} secondary next={next} selected={selected} />

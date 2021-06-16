@@ -7,7 +7,7 @@ import { Button } from "../components/Button";
 import Link from "next/link";
 import ModelContainer from "../components/ModelContainer";
 import { SymtomInput } from "../components/SymptomInput";
-import { groupsymptoms } from "../lib/symptoms";
+import { groupsymptoms, symptoms } from "../lib/symptoms";
 
 export default function Home() {
   const router = useRouter();
@@ -16,13 +16,23 @@ export default function Home() {
   const Predict = async () => {
     if (list.length > 0) {
       dispatch({ type: "symptoms", payload: list });
+      
+      let datalist = [];
+      symptoms.map((symptom) => {
+        if (list.includes(symptom)) {
+          datalist.push(1);
+        } else {
+          datalist.push(0);
+        }
+      });
+
       try {
         const res = await fetch(
-          `/api/prediction?symptoms=${state.symptoms.join(",")}`
+          `/api/prediction?symptoms=${list.join(",")}`
         );
         const { disease } = await res.json();
         dispatch({ type: "recent", payload: disease });
-        console.log(disease);
+        
       } catch (error) {
         console.log(error);
       }
