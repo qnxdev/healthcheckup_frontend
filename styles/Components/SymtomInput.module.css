@@ -49,6 +49,7 @@
 .symptomselector p {
   padding: 10px;
   margin: 0;
+  transition-duration: .5s;
 }
 .symptomselector p:hover {
   background: rgba(182, 182, 182, 0.616);

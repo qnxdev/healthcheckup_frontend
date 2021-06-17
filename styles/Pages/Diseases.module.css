@@ -12,6 +12,7 @@
   margin: 10px;
   border-radius: 20px;
   padding: 10px 20px;
+  transition-duration: .5s;
 }
 .alldiseases a:hover {
   background-color: rgba(182, 182, 182, 0.589);

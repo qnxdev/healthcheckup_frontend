@@ -11,10 +11,11 @@ export default function Home() {
   const router = useRouter();
   const { state, dispatch } = useContext(store);
   const [list, setList] = useState(state.symptoms);
+  const [isEmpty, setEmpty] = useState(true);
   const Predict = async () => {
     if (list.length > 0) {
       dispatch({ type: "symptoms", payload: list });
-      
+
       let datalist = [];
       symptoms.map((symptom) => {
         if (list.includes(symptom)) {
@@ -25,12 +26,9 @@ export default function Home() {
       });
 
       try {
-        const res = await fetch(
-          `/api/prediction?symptoms=${list.join(",")}`
-        );
+        const res = await fetch(`/api/prediction?symptoms=${list.join(",")}`);
         const { disease } = await res.json();
         dispatch({ type: "recent", payload: disease });
-        
       } catch (error) {
         console.log(error);
       }
@@ -53,7 +51,17 @@ export default function Home() {
           }
         }}
       >
-        <SymtomInput list={list} setList={setList} next={Predict} />
+        {list.length <= 0 ? (
+          <div className={styles.inputinfo}>
+            <h1>What concerns you about your health today?</h1>
+            <p >
+              Check your symptoms and find out what could be causing them. It's
+              fast, free and anonymous.
+            </p>
+          </div>
+        ) : (
+          <SymtomInput list={list} setList={setList} next={Predict} />
+        )}
         <div className={styles.graphicalinput}>
           <ModelContainer
             type={state.user.sex}

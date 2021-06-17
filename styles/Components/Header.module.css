@@ -23,16 +23,20 @@
 }
 .secondarylinks{
   justify-content: space-evenly;
-  width: 35%;
+  width: 40%;
   display: flex;
   font-weight: bold;
   cursor: pointer;
   transition-duration: .5s;
 }
-.secondarylinks p:hover{
-  border-bottom: 3px solid #fff;
+.secondarylinks p {
+  border-bottom: 3px solid transparent;
+  transition-duration: .5s;
   margin-bottom: 0;
   padding-bottom: 10px;
+}
+.secondarylinks p:hover{
+  border-bottom: 3px solid #fff;
 }
 .header h1 span{
   font-weight: 900;
@@ -41,6 +45,9 @@
 .profilemenu{
   cursor: pointer;
   font-weight: 600;
+  border-radius: 10px;
+  padding-left: 5px;
+  padding-right: 5px;
 }
 .profilemenu img{
   border-radius: 50px;
@@ -48,15 +55,12 @@
   width: 40px;
   height: 40px;
 }
-.profilemenu p:hover{
-  border-bottom: none;
+.profilemenu p{
+  border-bottom: none !important;
   margin-bottom: initial;
 }
 .profilemenu:hover{
   background-color: rgba(255, 255, 255, 0.473);
-  border-radius: 10px;
-  padding-left: 5px;
-  padding-right: 5px;
   transition-duration: .5s;
 }
 

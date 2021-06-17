@@ -6,10 +6,11 @@
   padding: 10px;
   height: min-content;
   color: #192a48;
+  cursor: pointer;
+  backdrop-filter: blur(62px);
 }
 .button:hover{
-  border: 2px solid #fff;
+  transition-duration: .5s;
   background-color: rgba(182, 182, 182, 0.589);
-  backdrop-filter: blur(62px);
   color: #fff;
 }

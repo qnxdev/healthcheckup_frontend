@@ -3,11 +3,36 @@ import { useEffect, useState } from "react";
 import Loader from "../../components/Loader";
 import Page from "../../components/Page";
 import { NHS_HOST, NHS_SK1 } from "../../lib/keys";
+import styles from "../../styles/Pages/Disease.module.css";
 
 export default function Disease() {
   const router = useRouter();
   const [result, setResult] = useState({});
 
+  const FormatDate = (date) => {
+    let months = [
+      "Jan",
+      "Feb",
+      "Mar",
+      "Apr",
+      "Ma",
+      "Jun",
+      "Jul",
+      "Aug",
+      "Sep",
+      "Oct",
+      "Nov",
+      "Dec",
+    ];
+    let d = new Date(date);
+    return d.getDate() + " " + months[d.getMonth()] + " " + d.getFullYear();
+  };
+  const HTMLParser = (html) => {
+    let parser = new DOMParser();
+    return parser
+      .parseFromString(html, "text/html")
+      .getElementsByTagName("body")[0].innerText;
+  };
   const Fetcher = async () => {
     try {
       const res = await fetch(
@@ -18,23 +43,38 @@ export default function Disease() {
       console.log(error);
     }
   };
+
   useEffect(() => {
     if (!result.name && router.query.name) {
       Fetcher();
     }
   }, [result, router]);
-  console.log(result);
-  useEffect(() => {
-    if (!router.query.name || router.query.name == "") {
-      console.log(router);
-    }
-  });
+
   return (
     <Page title={result.name || "Loading"}>
-      <div className="disease">
-        <div className="loading">
-            <Loader size={30}/>
-        </div>
+      <div className={styles.disease}>
+        {!result.name && (
+          <div className={styles.loading}>
+            <Loader size={50} />
+          </div>
+        )}
+        {result.name && (
+          <div className={styles.diseasecontent}>
+            <div className={styles.diseasehead}>
+              <h1>{result.name}</h1>
+              <div className={styles.diseaseinfo}>
+                <p>Source: NHS United Kingdom</p>
+                <p>{FormatDate(result.dateModified)}</p>
+              </div>
+              <h4>{result.description}</h4>
+            </div>
+            <div className={styles.diseasebody}>
+              {result.mainEntityOfPage.map((item, index) => (
+                <p key={index}>{HTMLParser(item.mainEntityOfPage[0].text)}</p>
+              ))}
+            </div>
+          </div>
+        )}
       </div>
     </Page>
   );

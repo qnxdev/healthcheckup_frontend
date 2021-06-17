@@ -1,5 +1,5 @@
 import Link from "next/link";
-export const Button = ({ width, inverted, children, onClick, link, title, secondary }) => {
+export const Button = ({ width, inverted, children, onClick, link, title }) => {
   const buttonStyle = { width: width || "initial" };
   return (
     <>

@@ -13,6 +13,7 @@ export default function Loader({ children, size }) {
           text-align: center;
           margin: 0px 10px;
           font-size: ${size ? size : 20}px;
+          font-family: serif;
         }
           @keyframes blink {
             0% {

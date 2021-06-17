@@ -4,6 +4,7 @@ import { NHS_HOST, NHS_SK1 } from "../../lib/keys";
 import { Button } from "../../components/Button";
 import styles from "../../styles/Pages/Diseases.module.css";
 import Loader from "../../components/Loader";
+import Link from "next/link";
 
 export default function Diseases() {
   const [result, setResult] = useState({});
@@ -23,11 +24,10 @@ export default function Diseases() {
   };
   useEffect(() => {
     if (!result.name) {
-      setLoading(true)
+      setLoading(true);
       Fetcher();
-    }
-    else{
-      if(loading) setLoading(false)
+    } else {
+      if (loading) setLoading(false);
     }
   });
 
@@ -36,22 +36,27 @@ export default function Diseases() {
       <h2>All diseases</h2>
       <br />
       <div className={styles.alldiseases}>
-        {!result.significantLink && <h4>{loading ? <Loader/> :  "Failed to load"}</h4>}
+        {!result.significantLink && (
+          <h4>{loading ? <Loader size={50} /> : "Failed to load"}</h4>
+        )}
         {result.significantLink &&
           result.significantLink.map((item, index) => (
-            <a
+            <Link
+            key={index}
               href={`/diseases/${item.url.replace(
                 "https://api.nhs.uk/conditions/",
                 ""
               )}`}
-              key={index}
-              onClick={() => {
-                setUrl(item.url);
-              }}
             >
-              <h3>{item.name}</h3>
-              <p>{item.description}</p>
-            </a>
+              <a
+                onClick={() => {
+                  setUrl(item.url);
+                }}
+              >
+                <h3>{item.name}</h3>
+                <p>{item.description}</p>
+              </a>
+            </Link>
           ))}
       </div>
       <div className={styles.navigate}>

@@ -1,0 +1,31 @@
+.disease{
+    padding: 0 10%;
+}
+.disease .loading{
+    display: flex;
+    height: 40vh;
+    align-items: center;
+    justify-content: center;
+}
+.disease .diseaseinfo{
+    display: flex;
+    align-items: center;
+    width: 60%;
+    justify-content: space-between;
+    margin: 10px auto;
+}
+.diseaseinfo p:nth-child(1){
+    text-align: left !important;
+}
+.diseaseinfo p:nth-child(2){
+    text-align: right !important;
+}
+.disease .diseasehead h4{
+    width: 60%;
+    margin: 10px auto;
+    text-align: justify;
+}
+.disease .diseasebody{
+    text-align: justify;
+    padding: 5% 0;
+}

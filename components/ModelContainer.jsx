@@ -45,6 +45,7 @@ export default function ModelContainer({ type, list, setList, next }) {
       <style jsx>{`
         .modelwrapper {
           width: 50%;
+          overflow-x: hidden;
         }
         .graphicselector {
           display: flex;
