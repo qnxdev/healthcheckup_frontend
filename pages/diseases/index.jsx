@@ -5,17 +5,21 @@ import { Button } from "../../components/Button";
 import styles from "../../styles/Pages/Diseases.module.css";
 import Loader from "../../components/Loader";
 import Link from "next/link";
+import { useRouter } from "next/router";
 
 export default function Diseases() {
+  const router= useRouter()
   const [result, setResult] = useState({});
   const [url, setUrl] = useState("");
-  const [PreviousUrl, setPreviousUrl] = useState("");
+  const [previousUrl, setPreviousUrl] = useState("");
   const [loading, setLoading] = useState(false);
 
   const Fetcher = async () => {
     try {
       const res = await fetch(
-        `${NHS_HOST}conditions/?subscription-key=${NHS_SK1}&synonyms=false&childArticles=false&status=all`
+        url != ""
+          ? url
+          : `${NHS_HOST}conditions/?subscription-key=${NHS_SK1}&synonyms=false&childArticles=false&status=all`
       );
       setResult(await res.json());
     } catch (error) {
@@ -27,13 +31,19 @@ export default function Diseases() {
       setLoading(true);
       Fetcher();
     } else {
-      if (loading) setLoading(false);
+      if (loading && url == "") setLoading(false);
     }
+    if(url != "" && url==result.relatedLink[2].url) setLoading(false)
   });
+  useEffect(() => {
+    setLoading(true);
+    Fetcher();
+    router.push("#top")
+  }, [url]);
 
   return (
     <Page title="All Diseases | Health App">
-      <h2>All diseases</h2>
+      <h2 >All diseases</h2>
       <br />
       <div className={styles.alldiseases}>
         {!result.significantLink && (
@@ -42,7 +52,7 @@ export default function Diseases() {
         {result.significantLink &&
           result.significantLink.map((item, index) => (
             <Link
-            key={index}
+              key={index}
               href={`/diseases/${item.url.replace(
                 "https://api.nhs.uk/conditions/",
                 ""
@@ -60,8 +70,25 @@ export default function Diseases() {
           ))}
       </div>
       <div className={styles.navigate}>
-        <Button inverted>Previous Page</Button>
-        <Button>Next Page</Button>
+        <Button
+          inverted
+          onClick={() => {
+            if (previousUrl != "") {
+              setUrl(previousUrl);
+              setPreviousUrl("");
+            }
+          }}
+        >
+          Previous Page
+        </Button>
+        <Button
+          onClick={() => {
+            setPreviousUrl(result.relatedLink[2].url);
+            setUrl(result.relatedLink[3].url);
+          }}
+        >
+          Next Page
+        </Button>
       </div>
     </Page>
   );

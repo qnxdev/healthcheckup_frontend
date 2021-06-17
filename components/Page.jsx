@@ -46,7 +46,7 @@ export default function Page({ title, children }) {
   return state.loading ? (
     <Splash />
   ) : (
-    <div className={styles.page}>
+    <div className={styles.page} id="top">
       <Head>
         <title>{title ? title + " | " : ""}Health App</title>
       </Head>
