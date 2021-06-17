@@ -21,7 +21,6 @@ export default function Results() {
       setSolutions(result ? result.solutions : []);
     }
   });
-  console.log();
   return (
     <Page title="Results">
       <div className={styles.results}>
