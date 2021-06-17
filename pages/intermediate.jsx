@@ -1,5 +1,5 @@
 import { useRouter } from "next/router";
-import { useContext, useEffect } from "react";
+import { useContext, useEffect, useState } from "react";
 import { Button } from "../components/Button";
 import Page from "../components/Page";
 import { store } from "../lib/store";
@@ -7,15 +7,25 @@ import styles from "../styles/Pages/Intermediate.module.css";
 
 export default function Predictions() {
   const { state, dispatch } = useContext(store);
-  const router=useRouter()
+  const router = useRouter();
+  const [error, setError] = useState("");
 
-  let randAcc = parseInt(Math.random(0.85, 1) * (99 - 85) + 85);
-  
-  useEffect(()=>{
-    if(state.recent==""){
-      router.push('/')
+  const randAcc = parseInt(Math.random(0.85, 1) * (99 - 85) + 85);
+
+  useEffect(() => {
+    if (error == "" && state.recent == "") {
+      router.push("/");
     }
-  })
+    if (state.recent) {
+      if (
+        state.recent.includes("tunnel expired") ||
+        state.recent.includes("ngrok")
+      ) {
+        setError("Results Unavailable");
+        dispatch({ type: "recent", payload: "" });
+      }
+    }
+  }, [state.recent]);
   return (
     <Page title="Predictions">
       <div className={styles.goback}>
@@ -24,7 +34,7 @@ export default function Predictions() {
         </Button>
       </div>
       <div className="predictions">
-        <h2>Prediction Results: {state.recent || `None found`}</h2>
+        <h2>Prediction Results: {error || state.recent || `None found`}</h2>
         <div className={styles.accuracy}>
           <p>Prediction Accuracy: </p>
           <div className={styles.progressbar}>

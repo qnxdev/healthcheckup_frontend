@@ -1,0 +1,26 @@
+.alldiseases {
+  padding: 0 5%;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.alldiseases a {
+    cursor: pointer;
+  border: 1px solid rgba(255, 255, 255, 0.274);
+  width: 25vw;
+  margin: 10px;
+  border-radius: 20px;
+  padding: 10px 20px;
+}
+.alldiseases a:hover {
+  background-color: rgba(182, 182, 182, 0.589);
+}
+.navigate {
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  width: 30%;
+  margin: auto;
+  padding: 50px;
+}

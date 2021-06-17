@@ -3,11 +3,9 @@ import { store } from "../lib/store";
 import { useRouter } from "next/router";
 import Page from "../components/Page";
 import styles from "../styles/Pages/Home.module.css";
-import { Button } from "../components/Button";
-import Link from "next/link";
 import ModelContainer from "../components/ModelContainer";
 import { SymtomInput } from "../components/SymptomInput";
-import { groupsymptoms, symptoms } from "../lib/symptoms";
+import { symptoms } from "../lib/symptoms";
 
 export default function Home() {
   const router = useRouter();
