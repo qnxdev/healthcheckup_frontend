@@ -8,42 +8,48 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 
 export default function Diseases() {
-  const router= useRouter()
+  const router = useRouter();
   const [result, setResult] = useState({});
   const [url, setUrl] = useState("");
   const [previousUrl, setPreviousUrl] = useState("");
   const [loading, setLoading] = useState(false);
 
   const Fetcher = async () => {
-    try {
-      const res = await fetch(
-        url != ""
-          ? url
-          : `${NHS_HOST}conditions/?subscription-key=${NHS_SK1}&synonyms=false&childArticles=false&status=all`
-      );
-      setResult(await res.json());
-    } catch (error) {
-      console.log(error);
-    }
+      try {
+        const res = await fetch(
+          url != "" && url.includes("subscription-key=")
+            ? url
+            : `${NHS_HOST}conditions/?subscription-key=${NHS_SK1}&synonyms=false&childArticles=false&status=all`
+        );
+        setResult(await res.json());
+      } catch (error) {
+        console.log(error);
+      }
   };
   useEffect(() => {
-    if (!result.name) {
+    if (!result.name && url == "") {
       setLoading(true);
       Fetcher();
     } else {
       if (loading && url == "") setLoading(false);
     }
-    if(url != "" && url==result.relatedLink[2].url) setLoading(false)
+    if (result && result.relatedLink) {
+      if (url != "" && url == result.relatedLink[2].url) setLoading(false);
+    }
   });
   useEffect(() => {
-    setLoading(true);
-    Fetcher();
-    router.push("#top")
+    if (router.pathname == "/diseases" && url != "") {
+      setLoading(true);
+      Fetcher();
+      if (url != "") {
+        router.push("#top");
+      }
+    }
   }, [url]);
 
   return (
     <Page title="All Diseases | Health App">
-      <h2 >All diseases</h2>
+      <h2>All diseases</h2>
       <br />
       <div className={styles.alldiseases}>
         {!result.significantLink && (
@@ -58,11 +64,7 @@ export default function Diseases() {
                 ""
               )}`}
             >
-              <a
-                onClick={() => {
-                  setUrl(item.url);
-                }}
-              >
+              <a>
                 <h3>{item.name}</h3>
                 <p>{item.description}</p>
               </a>

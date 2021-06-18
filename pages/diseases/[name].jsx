@@ -70,7 +70,7 @@ export default function Disease() {
             </div>
             <div className={styles.diseasebody}>
               {result.mainEntityOfPage.map((item, index) => (
-                <p key={index}>{HTMLParser(item.mainEntityOfPage[0].text)}</p>
+                <p key={index}>{item.mainEntityOfPage[0] && HTMLParser(item.mainEntityOfPage[0].text)}</p>
               ))}
             </div>
           </div>
