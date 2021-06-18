@@ -14,7 +14,7 @@ export default function Profile(params) {
     age: state.user.age,
   });
   const [save, setSave] = useState("Save");
-  const router=useRouter()
+  const router = useRouter();
 
   const SaveImage = (e) => {
     const file = e.target.files[0];
@@ -62,10 +62,9 @@ export default function Profile(params) {
           age: payload.age,
         })
       );
-      setTimeout(()=>{
-
-      router.push('/')
-      },2000)
+      setTimeout(() => {
+        router.push("/");
+      }, 2000);
     } catch (e) {
       console.log(e);
     }
@@ -93,7 +92,10 @@ export default function Profile(params) {
             id="firstname"
             placeholder="First name"
             value={user.firstname || state.user.firstname}
-            onChange={(e) => setUser({ ...user, firstname: e.target.value })}
+            onChange={(e) => {
+              if (/^[a-zA-Z]+$/.test(e.target.value))
+                setUser({ ...user, firstname: e.target.value });
+            }}
           />
           <input
             title="Last name"
@@ -101,7 +103,10 @@ export default function Profile(params) {
             id="lastname"
             placeholder="Last name"
             value={user.lastname || state.user.lastname}
-            onChange={(e) => setUser({ ...user, lastname: e.target.value })}
+            onChange={(e) => {
+              if (/^[a-zA-Z]+$/.test(e.target.value))
+                setUser({ ...user, lastname: e.target.value });
+            }}
           />
         </div>
         <select
